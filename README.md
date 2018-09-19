@@ -1,5 +1,15 @@
 # mmall
 慕课网—Java从零到企业级电商
+参考资料：<br/>
+&emsp;慕课视频 https://coding.imooc.com/class/96.html<br/>
+&emsp;阿里开放平台，支付宝接口API： https://open.alipay.com/platform/home.htm<br/>
+&emsp;github轮子，Mybatis-PageHelper mybaits分页插件 https://github.com/pagehelper/Mybatis-PageHelper<br/>
+
+- **代码写于：2018-09-20**<br/>
+   &emsp;JDK：JDK1.8版本，<br/>
+   &emsp;IDE：IDEA 2018.2，<br/>
+   &emsp;操作系统为：Windows10<br/>
+   &emsp;Spring：5.0.8.RELEASE<br/><br/>
 
 **注意：** 本项目与视频源码大致实现功能，思想相同，但代码结构上有很多区别，请谨慎使用，如：
 
