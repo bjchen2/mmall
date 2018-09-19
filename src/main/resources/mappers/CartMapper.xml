@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mmall.dao.CartMapper">
+  <resultMap id="Cart" type="com.mmall.pojo.Cart">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="product_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="quantity" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="checked" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.mmall.pojo.Cart">
+    insert into mmall_cart
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="checked != null">
+        checked,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null">
+        #{checked,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <sql id="Base_Column_List" >
+    id, user_id, product_id, quantity, checked, create_time, update_time
+  </sql>
+
+  <select id="getOneByUserIdAndProductId" resultMap="Cart">
+    select <include refid="Base_Column_List" /> from mmall_cart where product_id = #{productId} and user_id = #{userId}
+  </select>
+
+  <update id="updateQuantityAndCheckedById">
+    update mmall_cart set
+    <trim suffixOverrides=",">
+      <if test="quantity != null">
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="checked != null">
+        checked = #{checked,jdbcType=INTEGER},
+      </if>
+    </trim>
+    where id = #{id}
+  </update>
+
+  <select id="getAllByUserId" resultMap="Cart">
+    select <include refid="Base_Column_List"/> from mmall_cart where user_id=#{userId}
+  </select>
+
+  <select id="getAllCheckedByUserId" resultMap="Cart">
+    select <include refid="Base_Column_List"/> from mmall_cart where user_id=#{userId} and checked = 1
+  </select>
+
+  <!--有可能没有该用户的购物车信息，所以要先确认有已选商品-->
+  <select id="isAllCheckedByUserId" resultType="boolean">
+    SELECT
+    (SELECT count(1) from mmall_cart WHERE checked = 1 and user_id = #{userId})  != 0
+    and
+    (SELECT count(1) from mmall_cart WHERE checked = 0 and user_id = #{userId}) = 0
+  </select>
+
+  <!--and一定要写在外面，这样可以保证productIds为空时该语句会报错，而不会全删-->
+  <delete id="delAllByUserId">
+    delete from mmall_cart
+    where user_id = #{userId}
+    and product_id in
+    <if test="productIds != null">
+      <foreach collection="productIds" open="(" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </delete>
+
+  <delete id="delAllByIds">
+    delete from mmall_cart where id in
+    <foreach collection="cartIds" open="(" close=")" item="item" separator=",">
+      #{item}
+    </foreach>
+  </delete>
+
+  <update id="updateAllCheckedByUserId">
+    update mmall_cart set checked = #{checked}
+    where user_id = #{userId}
+  </update>
+
+  <update id="updateOneCheckedByUserIdAndProductId">
+    update mmall_cart set checked = #{checked}
+    where user_id = #{userId} and product_id = #{productId}
+  </update>
+
+  <!--IFNULL(sum(quantity),0)表示 ： 如果sum结果为null则自动赋值为0 （当查询结果为空时sum为null）-->
+  <select id="getCartProductCount" resultType="int">
+    select IFNULL(sum(quantity),0) from mmall_cart where user_id = #{userId}
+  </select>
+</mapper>

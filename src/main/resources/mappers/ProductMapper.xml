@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mmall.dao.ProductMapper">
+  <resultMap id="Product" type="com.mmall.pojo.Product">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="category_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="subtitle" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="main_image" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sub_images" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="detail" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="stock" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <insert id="insert" parameterType="com.mmall.pojo.Product">
+    insert into mmall_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="subtitle != null">
+        subtitle,
+      </if>
+      <if test="mainImage != null">
+        main_image,
+      </if>
+      <if test="subImages != null">
+        sub_images,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="mainImage != null">
+        #{mainImage,jdbcType=VARCHAR},
+      </if>
+      <if test="subImages != null">
+        #{subImages,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateById">
+    UPDATE mmall_product SET
+    <trim suffixOverrides=",">
+    <if test="categoryId != null">
+      categoryId=#{categoryId,jdbcType=INTEGER},
+    </if>
+    <if test="name != null">
+      name=#{name,jdbcType=VARCHAR},
+    </if>
+    <if test="subtitle != null">
+      subtitle=#{subtitle,jdbcType=VARCHAR},
+    </if>
+    <if test="mainImage != null">
+      mainImage=#{mainImage,jdbcType=VARCHAR},
+    </if>
+    <if test="subImages != null">
+      subImages=#{subImages,jdbcType=VARCHAR},
+    </if>
+    <if test="detail != null">
+      detail=#{detail,jdbcType=VARCHAR},
+    </if>
+    <if test="price != null">
+      price=#{price,jdbcType=DECIMAL},
+    </if>
+    <if test="stock != null">
+      stock=#{stock,jdbcType=INTEGER},
+    </if>
+    <if test="status != null">
+      status=#{status,jdbcType=INTEGER},
+    </if>
+    </trim>
+    where id=#{id}
+  </update>
+
+  <update id="updateStockByIds">
+     UPDATE mmall_product SET stock = case id
+     <foreach collection="products" item="item">
+       when #{item.id} then #{item.stock}
+     </foreach>
+    end where id in
+    <foreach collection="products" item="item" open="(" close=")" separator=",">
+      #{item.id}
+    </foreach>
+  </update>
+
+  <sql id="Base_Column_List" >
+    id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status,
+    create_time, update_time
+  </sql>
+
+  <select id="getById" resultMap="Product">
+    select <include refid="Base_Column_List"/> from mmall_product where id=#{productId}
+  </select>
+
+  <select id="getAllByIds" resultMap="Product">
+    select <include refid="Base_Column_List"/> from mmall_product where id in
+    <foreach collection="productIds" separator="," open="(" close=")" item="item">
+      #{item}
+    </foreach>
+  </select>
+
+  <select id="getAll" resultMap="Product">
+    select <include refid="Base_Column_List"/> from mmall_product
+  </select>
+
+  <select id="getAllByProductIdAndName" resultMap="Product">
+    select <include refid="Base_Column_List"/> from mmall_product
+--     where标签会把第一个and变为where
+    <where>
+      <if test="id != null">
+        and id = #{id}
+      </if>
+      <if test="name != null">
+        and name like #{name}
+      </if>
+    </where>
+  </select>
+
+  <select id="getOnSaleByProductNameAndCategoryId" resultMap="Product">
+    select <include refid="Base_Column_List"/> from  mmall_product
+    where status = 1
+    <if test="name != null">
+      and name like #{name}
+    </if>
+    <if test="categoryIds != null">
+      and category_id in
+      --最后一个元素后面不会加逗号
+      <foreach item="item" open="(" separator="," close=")" collection="categoryIds">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+</mapper>

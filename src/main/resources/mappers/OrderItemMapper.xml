@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mmall.dao.OrderItemMapper">
+  <resultMap id="OrderItem" type="com.mmall.pojo.OrderItem">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="order_no" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="product_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="product_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="product_image" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="current_unit_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="quantity" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="total_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+
+  <sql id="insert_column">
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="productImage != null">
+        product_image,
+      </if>
+      <if test="currentUnitPrice != null">
+        current_unit_price,
+      </if>
+      <if test="quantity != null">
+        quantity,
+      </if>
+      <if test="totalPrice != null">
+        total_price,
+      </if>
+    </trim>
+  </sql>
+
+  <insert id="insert" parameterType="com.mmall.pojo.OrderItem">
+    insert into mmall_order_item <include refid="insert_column"/>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=INTEGER},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="productImage != null">
+        #{productImage,jdbcType=VARCHAR},
+      </if>
+      <if test="currentUnitPrice != null">
+        #{currentUnitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null">
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="totalPrice != null">
+        #{totalPrice,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+
+  <insert id="insertAll">
+    insert into mmall_order_item <include refid="insert_column"/> values
+    <foreach collection="orderItems" separator="," item="item">
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="userId != null">
+          #{item.userId,jdbcType=INTEGER},
+        </if>
+        <if test="orderNo != null">
+          #{item.orderNo,jdbcType=BIGINT},
+        </if>
+        <if test="productId != null">
+          #{item.productId,jdbcType=INTEGER},
+        </if>
+        <if test="productName != null">
+          #{item.productName,jdbcType=VARCHAR},
+        </if>
+        <if test="productImage != null">
+          #{item.productImage,jdbcType=VARCHAR},
+        </if>
+        <if test="currentUnitPrice != null">
+          #{item.currentUnitPrice,jdbcType=DECIMAL},
+        </if>
+        <if test="quantity != null">
+          #{item.quantity,jdbcType=INTEGER},
+        </if>
+        <if test="totalPrice != null">
+          #{item.totalPrice,jdbcType=DECIMAL},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
+
+
+  <sql id="Base_Column_List" >
+    id, order_no, product_id, product_name, product_image, current_unit_price, quantity,
+    total_price, create_time, update_time, user_id
+  </sql>
+
+  <select id="getAllByOrderNoAndUserId" resultMap="OrderItem">
+    select <include refid="Base_Column_List"/> from mmall_order_item
+    where order_no = #{orderNo} and user_id = #{userId}
+  </select>
+
+  <select id="getAllByOrderNo" resultMap="OrderItem">
+    select <include refid="Base_Column_List"/> from mmall_order_item
+    where order_no = #{orderNo}
+  </select>
+</mapper>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mmall.dao.UserMapper">
+  <resultMap id="User" type="com.mmall.pojo.User">
+    <constructor>
+      <arg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="username" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="password" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="question" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="answer" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="role" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+
+  <insert id="insert" parameterType="com.mmall.pojo.User">
+    insert into mmall_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="question != null">
+        question,
+      </if>
+      <if test="answer != null">
+        answer,
+      </if>
+      <if test="role != null">
+        role,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="question != null">
+        #{question,jdbcType=VARCHAR},
+      </if>
+      <if test="answer != null">
+        #{answer,jdbcType=VARCHAR},
+      </if>
+      <if test="role != null">
+        #{role,jdbcType=INTEGER},
+      </if>
+
+    </trim>
+  </insert>
+
+  <select id="getById" resultMap="User">
+    select <include refid="Base_Column_List"/> from mmall_user where id=#{id}
+  </select>
+
+  <select id="checkUsername" parameterType="string" resultType="integer">
+    select count(1) from mmall_user where username = #{username}
+  </select>
+
+  <select id="checkEmail" parameterType="string" resultType="integer">
+    select count(1) from mmall_user where email = #{email}
+  </select>
+
+  <select id="checkEmailById" resultType="integer">
+    select count(1) from mmall_user where id!=#{userId} and email=#{email}
+  </select>
+
+  <sql id="Base_Column_List" >
+    id, username, password, email, phone, question, answer, role, create_time, update_time
+  </sql>
+  <select id="selectLogin" resultMap="User">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_user
+    where username = #{username}
+    and password = #{password}
+  </select>
+
+  <select id="getQuestionByUsername" resultType="string">
+    select question from mmall_user where username = #{username}
+  </select>
+
+  <select id="checkAnswer" resultType="integer">
+    select count(1) from mmall_user where username=#{username} and question=#{question} and answer=#{answer}
+  </select>
+
+  <update id="resetPasswordByToken">
+    update mmall_user set password=#{newPassword} where username = #{username}
+  </update>
+
+  <update id="resetPasswordByOldPass">
+    update mmall_user set password=#{newPassword} where id=#{user.userId} and password=#{user.password}
+  </update>
+
+  <update id="updateUserInfo">
+    update mmall_user
+    <trim prefix="set " suffixOverrides=",">
+      id=#{id},
+      <if test="email != null">
+        email = #{email},
+      </if>
+      <if test="phone != null">
+        phone = #{phone},
+      </if>
+      <if test="question != null">
+        question = #{question},
+      </if>
+      <if test="answer != null">
+        answer = #{answer},
+      </if>
+    </trim>
+    where id=#{id}
+  </update>
+
+  <select id="isExistByUserId" resultType="boolean">
+    select count(1) from mmall_user where id = #{userId}
+  </select>
+
+</mapper>

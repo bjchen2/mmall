@@ -1,0 +1,31 @@
+[19:21:36.466][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==>  Preparing: select id, username, password, email, phone, question, answer, role, create_time, update_time from mmall_user where username = ? and password = ? 
+[19:21:36.540][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==> Parameters: admin(String), admin(String)
+[19:21:36.596][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] <==      Total: 0
+[19:22:23.208][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==>  Preparing: select id, username, password, email, phone, question, answer, role, create_time, update_time from mmall_user where username = ? and password = ? 
+[19:22:23.241][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==> Parameters: admin(String), 21232F297A57A5A743894A0E4A801FC3(String)
+[19:23:50.138][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==>  Preparing: select id, username, password, email, phone, question, answer, role from mmall_user where username = ? and password = ? 
+[19:23:50.170][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==> Parameters: admin(String), 21232F297A57A5A743894A0E4A801FC3(String)
+[19:28:20.845][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==>  Preparing: select id, username, password, email, phone, question, answer, role from mmall_user where username = ? and password = ? 
+[19:28:20.900][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==> Parameters: admin(String), 21232F297A57A5A743894A0E4A801FC3(String)
+[19:30:03.657][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==>  Preparing: select id, username, password, email, phone, question, answer, role, create_time, update_time from mmall_user where username = ? and password = ? 
+[19:30:03.712][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==> Parameters: admin(String), 21232F297A57A5A743894A0E4A801FC3(String)
+[19:30:03.768][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] <==      Total: 1
+[22:40:24.556][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==>  Preparing: select id, username, password, email, phone, question, answer, role, create_time, update_time from mmall_user where username = ? and password = ? 
+[22:40:24.607][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] ==> Parameters: admin(String), 21232F297A57A5A743894A0E4A801FC3(String)
+[22:40:24.661][DEBUG][com.mmall.dao.UserMapper.selectLogin][main] <==      Total: 1
+[23:17:26.722][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category 
+[23:17:26.747][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==> Parameters: 
+[23:18:18.964][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category 
+[23:18:18.991][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==> Parameters: 
+[23:21:26.055][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category 
+[23:21:26.082][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==> Parameters: 
+[23:26:34.953][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category 
+[23:26:35.000][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==> Parameters: 
+[23:35:21.630][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category ( parent_id ) 
+[23:35:21.657][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==> Parameters: 
+[23:40:30.022][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category 
+[23:40:30.050][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==> Parameters: 
+[23:47:49.699][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category ( parent_id, name, status ) values ( ?, ?, ? ) 
+[23:48:57.004][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category ( parent_id, name, status ) values ( ?, ?, ? ) 
+[23:48:57.034][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==> Parameters: 100005(Integer), 可乐(String), true(Boolean)
+[23:48:57.124][DEBUG][com.mmall.dao.CategoryMapper.insert][main] <==    Updates: 1

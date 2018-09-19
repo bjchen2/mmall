@@ -1,0 +1,3 @@
+[09:18:32.416][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==>  Preparing: insert into mmall_category ( parent_id, name, status ) values ( ?, ?, ? ) 
+[09:18:32.497][DEBUG][com.mmall.dao.CategoryMapper.insert][main] ==> Parameters: 100005(Integer), 可s乐(String), false(Boolean)
+[09:18:32.596][DEBUG][com.mmall.dao.CategoryMapper.insert][main] <==    Updates: 1

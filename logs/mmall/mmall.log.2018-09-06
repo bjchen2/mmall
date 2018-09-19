@@ -1,0 +1,38 @@
+[16:32:51.944][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:32:52.030][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 26(Integer)
+[16:35:52.863][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:35:52.889][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 26(Integer)
+[16:35:52.966][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:35:53.059][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:35:53.060][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 28(Integer)
+[16:35:53.103][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:39:27.620][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:39:27.645][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 26(Integer)
+[16:39:27.725][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:39:27.819][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:39:27.820][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 28(Integer)
+[16:39:27.864][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:41:17.061][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:41:17.097][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 26(Integer)
+[16:41:17.154][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:41:17.237][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:41:17.237][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 28(Integer)
+[16:41:17.281][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:42:17.403][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:42:17.432][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 26(Integer)
+[16:42:17.495][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:42:17.583][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:42:17.584][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 28(Integer)
+[16:42:17.622][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:43:52.262][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:43:52.287][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 26(Integer)
+[16:43:52.348][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[16:43:52.432][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==>  Preparing: select id, category_id, name, subtitle, main_image, sub_images, detail, price, stock, status, create_time, update_time from mmall_product where id=? 
+[16:43:52.432][DEBUG][com.mmall.dao.ProductMapper.getById][main] ==> Parameters: 28(Integer)
+[16:43:52.477][DEBUG][com.mmall.dao.ProductMapper.getById][main] <==      Total: 1
+[18:09:22.504][DEBUG][c.m.dao.CartMapper.isAllCheckedByUserId][main] ==>  Preparing: SELECT -- 有可能没有该用户的购物车信息，所以要先确认有已选商品 (SELECT count(1) from mmall_cart WHERE checked = 1 and user_id = ?) != 0 and (SELECT count(1) from mmall_cart WHERE checked = 0 and user_id = ?) = 0 
+[18:09:22.633][DEBUG][c.m.dao.CartMapper.isAllCheckedByUserId][main] ==> Parameters: 21(Integer), 21(Integer)
+[18:09:22.693][DEBUG][c.m.dao.CartMapper.isAllCheckedByUserId][main] <==      Total: 1
+[18:09:43.012][DEBUG][c.m.dao.CartMapper.isAllCheckedByUserId][main] ==>  Preparing: SELECT -- 有可能没有该用户的购物车信息，所以要先确认有已选商品 (SELECT count(1) from mmall_cart WHERE checked = 1 and user_id = ?) != 0 and (SELECT count(1) from mmall_cart WHERE checked = 0 and user_id = ?) = 0 
+[18:09:43.045][DEBUG][c.m.dao.CartMapper.isAllCheckedByUserId][main] ==> Parameters: 291(Integer), 291(Integer)
+[18:09:43.098][DEBUG][c.m.dao.CartMapper.isAllCheckedByUserId][main] <==      Total: 1
